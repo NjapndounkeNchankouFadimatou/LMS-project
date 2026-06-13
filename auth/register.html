@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>LMS - Register</title>
+    <link rel="stylesheet" href="../assets/css/login.css">
+</head>
+<body>
+
+    <div class="login-container">
+        <h1>Welcome to LMS</h1>
+        <h2>Register</h2>
+
+        <form action="register.php" method="POST" class="login-form">
+
+            <label for="name">Full Name</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required>
+
+            <label for="sex">Sex</label>
+            <select id="sex" name="sex" required>
+                <option value="M">Male</option>
+                <option value="F">Female</option>
+            </select>
+
+            <label for="role">Role</label>
+            <select id="role" name="role" required>
+                <option value="student">Student</option>
+                <option value="teacher">Teacher</option>
+            </select>
+
+            <button type="submit">Register</button>
+
+        </form>
+
+        <p>Already have an account? <a href="../index.php">Login here</a></p>
+    </div>
+
+</body>
+</html>
