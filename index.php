@@ -37,7 +37,7 @@
 
         </form>
 
-        <p>Don't have an account? <a href="auth/register.html">Register here</a></p>
+        <p>Don't have an account? <a href="auth/register.php">Register here</a></p>
         <p><a href="documentation/index.html">Documentation</a></p>
     </div>
 

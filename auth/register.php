@@ -1,5 +1,12 @@
-
 <?php
+/**
+ * File: auth/register.php
+ * Purpose: Process the registration form, create a new user,
+ * log them in automatically, and redirect to their dashboard.
+ */
+
+// Start the session
+session_start();
 
 // Include database connection
 require_once '../config/db.php';
@@ -18,7 +25,7 @@ if (isset($_POST['submit'])) {
 
     if ($stmt->rowCount() > 0) {
         // Email already used, redirect back with error
-        header("Location: ../index.php");
+        header("Location: ../index.php?error=email_exists");
         exit();
     }
 
@@ -40,18 +47,14 @@ if (isset($_POST['submit'])) {
     // Redirect to the correct dashboard based on role
     switch ($role) {
         case 'student':
-            header("Location: ../dashboard/etudiant/index.php");
-            break;
-        case 'admin':
-            header("Location: ../dashboard/admin/index.php");
-            break;
-        case 'teacher':
-            header("Location: ../dashboard/enseigant/index.php");
-            break;
-
-        default:
+            header("Location: ../dashboard/student/index.php");
             exit();
-            break;
+        case 'teacher':
+            header("Location: ../dashboard/teacher/index.php");
+            exit();
+        default:
+            header("Location: ../index.php");
+            exit();
     }
 }
 ?>
@@ -89,7 +92,6 @@ if (isset($_POST['submit'])) {
             <select id="role" name="role" required>
                 <option value="student">Student</option>
                 <option value="teacher">Teacher</option>
-                <option value="teacher">Admin</option>
             </select>
 
             <button type="submit" name="submit">Register</button>
