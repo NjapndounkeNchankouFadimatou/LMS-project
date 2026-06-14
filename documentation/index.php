@@ -2,7 +2,7 @@
 /**
  * File: documentation/index.php
  * Purpose: Documentation page (accessible to logged-in users only).
- * Includes header and footer.
+ * Includes header and footer. No sidebar.
  */
 
 require_once '../includes/header.php';
@@ -10,7 +10,7 @@ require_once '../includes/header.php';
 
 <link rel="stylesheet" href="/LMS-project/assets/css/documentation.css">
 
-<main class="content">
+<main class="content no-sidebar">
 
     <div class="doc-container">
 
@@ -100,9 +100,6 @@ require_once '../includes/header.php';
         <!-- Section 5: FAQ -->
         <div class="doc-section" id="faq">
             <h2>5. FAQ</h2>
-
-            <h3>Can I change my role after registration ?</h3>
-            <p>No, only an admin can change your role from the user management panel.</p>
 
             <h3>What file formats are accepted for courses ?</h3>
             <p>PDF files and video files (MP4 recommended).</p>

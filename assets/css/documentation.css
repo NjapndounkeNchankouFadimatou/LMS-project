@@ -107,3 +107,7 @@
     font-size: 14px;
     line-height: 1.7;
 }
+
+.content.no-sidebar {
+    margin-left: 0;
+}

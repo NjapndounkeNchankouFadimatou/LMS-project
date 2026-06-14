@@ -90,3 +90,16 @@ CREATE TABLE certification (
     FOREIGN KEY (module_id) REFERENCES modules(id) ON DELETE CASCADE,
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
+
+-- ============================================
+-- Table: enrollments
+-- Tracks which modules a student has chosen to follow
+-- ============================================
+CREATE TABLE enrollments (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    module_id INT NOT NULL,
+    enrollment_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (module_id) REFERENCES modules(id) ON DELETE CASCADE
+);
