@@ -17,28 +17,28 @@ if ($_SESSION['role'] !== 'admin') {
 $passing_average = 50;
 
 // Handle certificate issuance
-if (isset($_POST['issue_certificate'])) {
-    $student_id = $_POST['student_id'];
-    $module_id = $_POST['module_id'];
+if (isset($_POST['issue_certificate'])) { //if admin post form 
+    $student_id = $_POST['student_id'];//take the student id enter
+    $module_id = $_POST['module_id']; // take the module id
 
     // Check if certificate already exists
     $check = $pdo->prepare("SELECT id FROM certification WHERE user_id = ? AND module_id = ?");
     $check->execute([$student_id, $module_id]);
 
-    if ($check->rowCount() === 0) {
+    if ($check->rowCount() === 0) { //assures that no certificates has been issued to this student for this module
         $stmt = $pdo->prepare("
             INSERT INTO certification (module_id, user_id, description) 
             VALUES (?, ?, ?)
-        ");
+        ");//insere a new ligne
         $stmt->execute([$module_id, $student_id, "Certificate issued by admin"]);
     }
 
     header("Location: certificates_manage.php");
-    exit();
+    exit();// else go back to manage
 }
 
 // Get all modules
-$modules = $pdo->query("SELECT * FROM modules ORDER BY creation_date DESC")->fetchAll(PDO::FETCH_ASSOC);
+$modules = $pdo->query("SELECT * FROM modules ORDER BY creation_date DESC")->fetchAll(PDO::FETCH_ASSOC);// execute as en seul seul bloque et renvoie la reponse tout les module(fetchAll) 
 ?>
 
 <main class="content">
@@ -54,7 +54,7 @@ $modules = $pdo->query("SELECT * FROM modules ORDER BY creation_date DESC")->fet
             INNER JOIN users u ON e.user_id = u.id
             WHERE e.module_id = ?
         ");
-        $stmt->execute([$module['id']]);
+        $stmt->execute([$module['id']]);//search a special module
         $students = $stmt->fetchAll(PDO::FETCH_ASSOC);
     ?>
 

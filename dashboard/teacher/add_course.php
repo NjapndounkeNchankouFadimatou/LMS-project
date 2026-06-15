@@ -66,21 +66,35 @@ if (isset($_POST['submit'])) {
         // Insert quiz questions
         if (isset($_POST['question_text'])) {
 
-            $questions = $_POST['question_text'];
-            $options = $_POST['answer_options'];
-            $correct = $_POST['correct_answer'];
+            $questions_text = $_POST['question_text'];
+            $options_a = $_POST['option_a'];
+            $options_b = $_POST['option_b'];
+            $options_c = $_POST['option_c'];
+            $options_d = $_POST['option_d'];
 
-            for ($i = 0; $i < count($questions); $i++) {
+            for ($i = 0; $i < count($questions_text); $i++) {
 
-                if (trim($questions[$i]) === '') {
+                if (trim($questions_text[$i]) === '') {
                     continue;
                 }
+
+                $options = [
+                    'A' => trim($options_a[$i]),
+                    'B' => trim($options_b[$i]),
+                    'C' => trim($options_c[$i]),
+                    'D' => trim($options_d[$i])
+                ];
+
+                $correct_letter = $_POST['correct_' . $i];
+
+                $answer_options_string = implode(",", $options);
+                $correct_answer_text = $options[$correct_letter];
 
                 $stmt3 = $pdo->prepare("
                     INSERT INTO quiz (course_id, question_text, answer_options, correct_answer) 
                     VALUES (?, ?, ?, ?)
                 ");
-                $stmt3->execute([$course_id, $questions[$i], $options[$i], $correct[$i]]);
+                $stmt3->execute([$course_id, $questions_text[$i], $answer_options_string, $correct_answer_text]);
             }
         }
 
@@ -126,14 +140,32 @@ if (isset($_POST['submit'])) {
 
             <div id="questions-container">
                 <div class="question-block">
+
                     <label>Question Text</label>
                     <input type="text" name="question_text[]" required>
 
-                    <label>Answer Options (comma separated)</label>
-                    <input type="text" name="answer_options[]" placeholder="Option A, Option B, Option C" required>
+                    <label>Options (select the radio button next to the correct one)</label>
 
-                    <label>Correct Answer (must match one option exactly)</label>
-                    <input type="text" name="correct_answer[]" required>
+                    <div class="option-row">
+                        <input type="text" name="option_a[]" placeholder="Option A" required>
+                        <label><input type="radio" name="correct_0" value="A" required> Correct</label>
+                    </div>
+
+                    <div class="option-row">
+                        <input type="text" name="option_b[]" placeholder="Option B" required>
+                        <label><input type="radio" name="correct_0" value="B"> Correct</label>
+                    </div>
+
+                    <div class="option-row">
+                        <input type="text" name="option_c[]" placeholder="Option C" required>
+                        <label><input type="radio" name="correct_0" value="C"> Correct</label>
+                    </div>
+
+                    <div class="option-row">
+                        <input type="text" name="option_d[]" placeholder="Option D" required>
+                        <label><input type="radio" name="correct_0" value="D"> Correct</label>
+                    </div>
+
                 </div>
             </div>
 

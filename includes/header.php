@@ -20,6 +20,8 @@ $dashboard_link = "/LMS-project/dashboard/" . $_SESSION['role'] . "/index.php";
 <head>
     <meta charset="UTF-8">
     <title>LMS - Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/LMS-project/assets/css/dashboard.css">
 </head>
 <body>

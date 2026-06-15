@@ -35,29 +35,32 @@ $questions = $stmt2->fetchAll(PDO::FETCH_ASSOC);
 
             <input type="hidden" name="course_id" value="<?php echo $course_id; ?>">
 
-            <?php foreach ($questions as $index => $question) {
+            <div class="quiz-questions-scroll">
 
-                // Split answer options string into an array
-                $options = explode(",", $question['answer_options']);
-            ?>
+                <?php foreach ($questions as $index => $question) {
 
-                <div class="quiz-question">
-                    <p><strong>Question <?php echo $index + 1; ?>:</strong> <?php echo htmlspecialchars($question['question_text']); ?></p>
+                    $options = explode(",", $question['answer_options']);
+                ?>
 
-                    <?php foreach ($options as $option) {
-                        $option = trim($option);
-                    ?>
-                        <label class="quiz-option">
-                            <input type="radio" 
-                                   name="answer_<?php echo $question['id']; ?>" 
-                                   value="<?php echo htmlspecialchars($option); ?>">
-                            <?php echo htmlspecialchars($option); ?>
-                        </label>
-                    <?php } ?>
+                    <div class="quiz-question">
+                        <p><strong>Question <?php echo $index + 1; ?>:</strong> <?php echo htmlspecialchars($question['question_text']); ?></p>
 
-                </div>
+                        <?php foreach ($options as $option) {
+                            $option = trim($option);
+                        ?>
+                            <label class="quiz-option">
+                                <input type="radio" 
+                                       name="answer_<?php echo $question['id']; ?>" 
+                                       value="<?php echo htmlspecialchars($option); ?>">
+                                <?php echo htmlspecialchars($option); ?>
+                            </label>
+                        <?php } ?>
 
-            <?php } ?>
+                    </div>
+
+                <?php } ?>
+
+            </div>
 
             <button type="button" id="submit-quiz-btn" class="btn-primary">Submit Quiz</button>
 
@@ -65,6 +68,13 @@ $questions = $stmt2->fetchAll(PDO::FETCH_ASSOC);
 
         <!-- Result will be displayed here after submission -->
         <div id="quiz-result"></div>
+
+        <!-- Action buttons shown after quiz submission -->
+        <div id="quiz-actions" class="quiz-actions" style="display: none;">
+            <a href="/LMS-project/dashboard/student/quiz.php?course_id=<?php echo $course_id; ?>" class="btn-secondary">Retry Quiz</a>
+            <a href="/LMS-project/dashboard/student/course.php?course_id=<?php echo $course_id; ?>" class="btn-secondary">Back to Course</a>
+            <a href="/LMS-project/dashboard/student/module_detail.php?module_id=<?php echo $course['module_id']; ?>" class="btn-primary">Continue to Module</a>
+        </div>
 
     <?php } ?>
 

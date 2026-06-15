@@ -2,7 +2,6 @@
 /**
  * File: documentation/index.php
  * Purpose: Documentation page (accessible to logged-in users only).
- * Includes header and footer. No sidebar.
  */
 
 require_once '../includes/header.php';
@@ -20,17 +19,14 @@ require_once '../includes/header.php';
             <p>Learn how to use the Learning Management System</p>
         </div>
 
-        <!-- Table of contents -->
-        <div class="doc-toc">
-            <h2>Table of Contents</h2>
-            <ul>
-                <li><a href="#overview">1. Overview</a></li>
-                <li><a href="#student">2. Student Guide</a></li>
-                <li><a href="#teacher">3. Teacher Guide</a></li>
-                <li><a href="#admin">4. Admin Guide</a></li>
-                <li><a href="#faq">5. FAQ</a></li>
-            </ul>
-        </div>
+        <!-- Table of contents as horizontal navbar -->
+        <nav class="doc-toc">
+            <a href="#overview" class="doc-toc-link">1. Overview</a>
+            <a href="#student" class="doc-toc-link">2. Student Guide</a>
+            <a href="#teacher" class="doc-toc-link">3. Teacher Guide</a>
+            <a href="#admin" class="doc-toc-link">4. Admin Guide</a>
+            <a href="#faq" class="doc-toc-link">5. FAQ</a>
+        </nav>
 
         <!-- Section 1: Overview -->
         <div class="doc-section" id="overview">
@@ -54,47 +50,41 @@ require_once '../includes/header.php';
             <h2>2. Student Guide</h2>
 
             <h3>2.1 Browse Courses</h3>
-            <p>From your dashboard, click <strong>Courses</strong> in the sidebar. You will see all available courses grouped by module. Click on a course to access its content (PDF or video).</p>
+            <p>From your dashboard, click <strong>Modules</strong> in the sidebar. You will see all available modules. Click on a module to access its content (PDF or video).</p>
 
             <h3>2.2 Take a Quiz</h3>
             <p>After viewing a course, click <strong>Take Quiz</strong>. Answer all questions and submit. Your score will be saved and your progression updated automatically.</p>
 
             <h3>2.3 Track your Progress</h3>
-            <p>Go to <strong>Progress</strong> in the sidebar to see your scores per course and your overall progression (%) per module.</p>
+            <p>Go to <strong>My Modules</strong> to see your scores per course and your overall progression (%) per module.</p>
 
             <h3>2.4 Certificates</h3>
-            <p>When you complete all courses in a module with a passing score, a certificate is automatically issued. Go to <strong>Certificates</strong> to view and print it.</p>
+            <p>When you complete all courses in a module with a passing score, a certificate is automatically issued. Go to <strong>Certificates</strong> to view it.</p>
         </div>
 
         <!-- Section 3: Teacher Guide -->
         <div class="doc-section" id="teacher">
             <h2>3. Teacher Guide</h2>
 
-            <h3>3.1 Create a Course</h3>
-            <p>From your dashboard, click <strong>Create Course</strong>. Fill in the course name, description, select a module, choose the type (PDF or video) and upload your file. A first quiz will be created at the same time.</p>
+            <h3>3.1 Publish a Module</h3>
+            <p>From your dashboard, click <strong>Publish</strong>. Fill in the module description, course name, description, choose the type (PDF or video), upload your file, and add quiz questions.</p>
 
             <h3>3.2 Add Quiz Questions</h3>
-            <p>After creating a course, go to <strong>Manage Courses</strong>, select your course and click <strong>Add Question</strong> to add questions and answers to the quiz.</p>
+            <p>For each question, fill in the question text, the four answer options, and select the radio button next to the correct one.</p>
 
             <h3>3.3 Track Students</h3>
-            <p>Go to <strong>Student Progress</strong> in the sidebar to see the list of students who have taken your course quizzes and their scores.</p>
+            <p>Go to <strong>My Modules</strong> to see students enrolled in your modules, or <strong>Statistics</strong> for detailed progress and average scores.</p>
         </div>
 
         <!-- Section 4: Admin Guide -->
         <div class="doc-section" id="admin">
             <h2>4. Admin Guide</h2>
 
-            <h3>4.1 Manage Modules</h3>
-            <p>Go to <strong>Modules</strong> in the sidebar to create, edit or delete modules. A module groups several courses on the same topic.</p>
+            <h3>4.1 Manage Platform</h3>
+            <p>Go to <strong>Manage Platform</strong> to view all users (change their role or delete accounts) and all modules (delete if needed).</p>
 
-            <h3>4.2 Manage Users</h3>
-            <p>Go to <strong>Users</strong> to see all registered users, change their role or delete their account.</p>
-
-            <h3>4.3 Global Statistics</h3>
-            <p>Go to <strong>Statistics</strong> to see the number of courses per teacher, enrollments per module, and average quiz scores.</p>
-
-            <h3>4.4 Certificates</h3>
-            <p>Go to <strong>Certificates</strong> to see all certificates issued to students.</p>
+            <h3>4.2 Certificates</h3>
+            <p>Go to <strong>Certificates</strong> to see student averages per module and manually issue certificates when appropriate.</p>
         </div>
 
         <!-- Section 5: FAQ -->
@@ -105,7 +95,7 @@ require_once '../includes/header.php';
             <p>PDF files and video files (MP4 recommended).</p>
 
             <h3>How is my progression calculated ?</h3>
-            <p>Your progression in a module = (number of quizzes passed / total quizzes in module) × 100.</p>
+            <p>Your progression in a module = (number of courses completed / total courses in module) × 100.</p>
 
             <h3>How do I get a certificate ?</h3>
             <p>Complete all course quizzes in a module with a passing score (50% minimum).</p>

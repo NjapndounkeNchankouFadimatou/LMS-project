@@ -13,15 +13,12 @@ document.getElementById('submit-quiz-btn').addEventListener('click', function ()
     const radios = form.querySelectorAll('input[type="radio"]:checked');
 
     radios.forEach(function (radio) {
-        // name format: answer_<question_id>
         const questionId = radio.name.split('_')[1];
         answers[questionId] = radio.value;
     });
 
-    // Get course_id from the hidden input
     const courseId = formData.get('course_id');
 
-    // Send data via fetch (AJAX)
     fetch('/LMS-project/ajax/submit_quiz.php', {
         method: 'POST',
         headers: {
@@ -33,11 +30,18 @@ document.getElementById('submit-quiz-btn').addEventListener('click', function ()
     .then(response => response.json())
     .then(data => {
         const resultDiv = document.getElementById('quiz-result');
+        const actionsDiv = document.getElementById('quiz-actions');
 
         if (data.success) {
-            resultDiv.innerHTML = 
-                '<p class="quiz-score">Your score: ' + data.score + '% (' + 
-                data.correct_count + '/' + data.total_questions + ' correct)</p>';
+            let html = '<p class="quiz-score">Your score: ' + data.score + '% (' + 
+                       data.correct_count + '/' + data.total_questions + ' correct)</p>';
+
+            if (data.certificate_earned) {
+                html += '<p class="certificate-earned">Congratulations! You earned a certificate for completing this module.</p>';
+            }
+
+            resultDiv.innerHTML = html;
+            actionsDiv.style.display = 'flex';
         } else {
             resultDiv.innerHTML = '<p class="status-failed">' + data.message + '</p>';
         }
@@ -47,20 +51,3 @@ document.getElementById('submit-quiz-btn').addEventListener('click', function ()
     });
 
 });
-
-then(data => {
-    const resultDiv = document.getElementById('quiz-result');
-
-    if (data.success) {
-        let html = '<p class="quiz-score">Your score: ' + data.score + '% (' + 
-                   data.correct_count + '/' + data.total_questions + ' correct)</p>';
-
-        if (data.certificate_earned) {
-            html += '<p class="certificate-earned">Congratulations! You earned a certificate for completing this module.</p>';
-        }
-
-        resultDiv.innerHTML = html;
-    } else {
-        resultDiv.innerHTML = '<p class="status-failed">' + data.message + '</p>';
-    }
-})

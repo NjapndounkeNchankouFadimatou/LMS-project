@@ -94,14 +94,14 @@ $modules = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <?php foreach ($students as $student) {
 
                                 // Courses completed by this student in this module
+                                // Courses attempted by this student in this module (has a score)
                                 $stmt5 = $pdo->prepare("
                                     SELECT COUNT(DISTINCT course_id) 
                                     FROM score 
                                     WHERE user_id = ? 
-                                    AND score >= ?
                                     AND course_id IN (SELECT id FROM courses WHERE module_id = ?)
                                 ");
-                                $stmt5->execute([$student['id'], $passing_score, $module['id']]);
+                                $stmt5->execute([$student['id'], $module['id']]);
                                 $completed = $stmt5->fetchColumn();
 
                                 $progress = $total_courses > 0 ? round(($completed / $total_courses) * 100) : 0;

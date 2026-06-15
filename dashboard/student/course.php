@@ -52,8 +52,7 @@ $existing_score = $stmt3->fetchColumn();
         <?php } elseif ($course['type'] === 'video') { ?>
 
             <video width="100%" height="500px" controls>
-                <source src="/LMS-project/<?php echo htmlspecialchars($course['file_path']); ?>" type="video/mp4">
-                Your browser does not support the video tag.
+            <source src="/LMS-project/<?php echo htmlspecialchars($course['file_path']); ?>" type="video/mp4">                Your browser does not support the video tag.
             </video>
 
         <?php } ?>

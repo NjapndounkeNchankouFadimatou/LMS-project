@@ -63,15 +63,17 @@ if (isset($_POST['submit'])) {
 <head>
     <meta charset="UTF-8">
     <title>LMS - Register</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/login.css">
 </head>
-<body>
+<body class="register-page">
 
-    <div class="login-container">
+    <div class="register-container">
         <h1>Welcome to LMS</h1>
         <h2>Register</h2>
-
-        <form action="" method="POST" class="login-form">
+ 
+        <form action="register.php" method="POST" class="login-form">
 
             <label for="name">Full Name</label>
             <input type="text" id="name" name="name" required>
